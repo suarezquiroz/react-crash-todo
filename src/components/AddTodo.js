@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux";
 import PropTypes from 'prop-types'
+
+import { addTodo } from "../actions/todoActions";
 
 export class AddTodo extends Component {
 
   state = {
     title: ''
   }
-
 
   onSubmit = (e) => {
     e.preventDefault();
@@ -42,4 +44,11 @@ export class AddTodo extends Component {
 AddTodo.propTypes = {
   addTodo: PropTypes.func.isRequired
 };
-export default AddTodo
+
+const mapStateToProps = state => {
+  return ({
+    todos: state.todos.todos
+  })
+}
+
+export default connect(mapStateToProps,{addTodo})(AddTodo)
